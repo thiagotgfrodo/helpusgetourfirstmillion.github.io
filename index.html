@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="js/jquery.min.js"></script>
+</head>
+<style>
+  @font-face {
+      font-family: mainFont;
+      src: url(style/GrundfosTheSansOT-2XL.otf);
+  }
+  @font-face {
+      font-family: secondaryFont;
+      src: url(style/GrundfosTheSansOT-5R.otf);
+  }
+  .title {
+      font: 45px mainFont;
+    }
+  .subtitle {
+    font: 35px mainFont;
+  }
+  #content{
+    width:1500px;
+    height:650px;
+    opacity:1;
+    background:#333;
+    position:relative;
+    margin: 0 auto;
+}
+.item {
+    width:100px;
+    height:100px;
+    display: inline;
+    position: relative;
+    background:red;
+    opacity: 0.5;
+}
+.box {
+  height: 300px;
+  width: 200px;
+  background: lightgray;
+}
+
+</style>
+<body style="text-align: center;">
+  <div class="title">Help us to get our first MILLION</div>
+
+  <span class="subtitle">These companies have already donated... </span><span class="subtitle">And more and more are coming</span>
+
+  <div id="content">
+  </div>
+  <br>
+  <br>
+  <div style="font: 40px secondaryFont; width: 1500px; height: 500px; background: lightgray; margin: 0 auto;">
+  <div>WHY??</div>
+  <div>Because we wanna be rich</div>
+  <div>And also because we want to help people!!</div>
+  <div>Half of the money will be donated to charit</div>
+  </div>
+</body>
+<script>
+  var i = 0;
+  function animateOnceATime(i) {
+    var allSpan = document.getElementsByClassName('item');
+      $(allSpan[i]).animate({
+        width: "250",
+        height: "250",
+        opacity: 1,
+    },{ duration: 2000,
+        start: function(){
+          this.style.position = "absolute";
+        }} ).animate({
+        width: 100,
+        height: 100,
+        opacity: 0.5,
+    },{ duration: 2000,
+        complete: function(){
+          this.style.position = "relative";
+          console.log('complete '+ i );
+          i++;
+          animateOnceATime(i);
+          if(i == (allSpan.length)){
+            i = 0;
+            animateOnceATime(i);
+          }
+        }
+      });
+  }
+  var countSpan = 1;
+  var appendSpan = function(){
+    setInterval(function(){
+      if(countSpan <= 70){
+        var span = document.createElement('span');
+        span.classList.add('item');
+        // span.style.display = 'none';
+        document.getElementById('content').appendChild(span);
+        // span.style.left = "-500px";
+        countSpan++;
+      }
+   }, 1500);
+  };
+  var span = document.createElement('span');
+  span.classList.add('item');
+  //     // span.style.left = 50*countSpan + 'px';
+  document.getElementById('content').appendChild(span);
+  appendSpan();
+  animateOnceATime(i);
+</script>
+</html>
